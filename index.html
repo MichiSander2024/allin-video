@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALL IN — Exklusives Video von Michi Sander</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- GetResponse Analytics / Web Connect -->
+<script type="text/javascript">
+  (function(m, o, n, t, e, r, _){
+      m['__GetResponseAnalyticsObject'] = e;m[e] = m[e] || function() {(m[e].q = m[e].q || []).push(arguments)};
+      r = o.createElement(n);_ = o.getElementsByTagName(n)[0];r.async = 1;r.src = t;r.setAttribute('crossorigin', 'use-credentials');_.parentNode.insertBefore(r, _);
+  })(window, document, 'script', 'https://an.gr-wcon.com/script/84134f14-9bc7-432b-a6ab-625f5c8f63af/ga.js', 'GrTracking');
+</script>
+<!-- End GetResponse Analytics -->
+
+<style>
+  :root {
+    --red: #C0392B;
+    --red-deep: #96281B;
+    --red-glow: rgba(192,57,43,0.18);
+    --red-dim: rgba(192,57,43,0.12);
+    --black: #080808;
+    --card: #111111;
+    --border: rgba(192,57,43,0.28);
+    --text: #EDE8E0;
+    --muted: #6B6460;
+    --white: #FFFFFF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    padding: 40px 20px;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% -10%, rgba(192,57,43,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 80% 90%, rgba(192,57,43,0.06) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Diagonale Linien Textur */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(192,57,43,0.025) 40px,
+      rgba(192,57,43,0.025) 41px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* TOP LABEL */
+  .eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: fadeDown 0.7s ease both;
+  }
+
+  .eyebrow::before, .eyebrow::after {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--red);
+    opacity: 0.6;
+  }
+
+  /* HEADLINE */
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 10vw, 78px);
+    font-weight: 800;
+    line-height: 0.95;
+    text-align: center;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    animation: fadeDown 0.7s ease 0.08s both;
+  }
+
+  h1 .accent {
+    color: var(--red);
+    display: block;
+  }
+
+  .subhead {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(16px, 3vw, 20px);
+    font-weight: 600;
+    color: var(--muted);
+    text-align: center;
+    letter-spacing: 0.04em;
+    margin-bottom: 36px;
+    animation: fadeDown 0.7s ease 0.15s both;
+  }
+
+  /* PREVIEW BOX — gesperrt */
+  .preview {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin-bottom: 32px;
+    animation: fadeUp 0.7s ease 0.22s both;
+    position: relative;
+  }
+
+  .preview-inner {
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #1a0800 0%, #0d0d0d 60%, #120000 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+  }
+
+  /* Blurred fake thumbnail */
+  .preview-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(192,57,43,0.08) 0%, transparent 70%);
+  }
+
+  .lock-ring {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--red-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .lock-ring svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--red);
+  }
+
+  .preview-text {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* FORM CARD */
+  .card {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px 28px 24px;
+    animation: fadeUp 0.7s ease 0.3s both;
+  }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .card-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 22px;
+    line-height: 1.6;
+  }
+
+  input[type="email"] {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(192,57,43,0.22);
+    border-radius: 8px;
+    padding: 13px 16px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    outline: none;
+    margin-bottom: 12px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  input[type="email"]::placeholder { color: var(--muted); }
+  input[type="email"]:focus {
+    border-color: var(--red);
+    background: rgba(192,57,43,0.06);
+  }
+
+  .btn {
+    width: 100%;
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: background 0.2s, transform 0.1s;
+  }
+
+  .btn:hover { background: var(--red-deep); transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+  .btn:disabled { opacity: 0.5; pointer-events: none; }
+
+  .privacy {
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.7;
+  }
+
+  .error {
+    display: none;
+    font-size: 12px;
+    color: #e05c5c;
+    margin-bottom: 10px;
+  }
+
+  /* SUCCESS */
+  .success-card {
+    display: none;
+    width: 100%;
+    background: var(--card);
+    border: 1px solid rgba(192,57,43,0.4);
+    border-radius: 14px;
+    padding: 40px 28px;
+    text-align: center;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .success-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--red-dim);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+  }
+
+  .success-icon svg {
+    width: 26px;
+    height: 26px;
+    stroke: var(--red);
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .success-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .success-text {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .success-text strong { color: var(--red); }
+
+  footer {
+    position: relative;
+    z-index: 1;
+    margin-top: 36px;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    letter-spacing: 0.05em;
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* GR EMBED CONTAINER — passt sich an Iframe-Höhe an */
+  .gr-embed-wrap {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 8px;
+    animation: fadeUp 0.7s ease 0.3s both;
+    overflow: hidden;
+    position: relative;
+  }
+  .gr-embed-wrap iframe,
+  .gr-embed-wrap > div,
+  .gr-embed-wrap > form {
+    width: 100% !important;
+    max-width: 100% !important;
+    border: none !important;
+    background: transparent !important;
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="eyebrow">Michi Sander</div>
+
+  <h1>ALL<span class="accent">IN</span></h1>
+  <p class="subhead">Pro Gambling Staking im MLM</p>
+
+  <div class="preview">
+    <div class="preview-inner">
+      <div class="lock-ring">
+        <svg viewBox="0 0 24 24"><path d="M18 11H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2z"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+      </div>
+      <span class="preview-text">Zugang mit E-Mail freischalten</span>
+    </div>
+  </div>
+
+  <!-- GETRESPONSE FORM EMBED -->
+  <!--
+    Embed-Code wird von GetResponse bezogen (Form: "ALL IN Video Gate", Liste: ALL IN VIDEO).
+    Double-Opt-In aktiv. Nach Bestätigung leitet GR auf danke.html weiter.
+    KEIN API-Key im Code (sicher).
+  -->
+  <div class="gr-embed-wrap" id="grEmbedWrap">
+    <!-- GR_EMBED_START — Form: ALL IN Video Gate, Liste: ALL IN VIDEO -->
+    <getresponse-form form-id="567e4ab9-26b4-412a-a2fe-26aaee52563b" e="1"></getresponse-form>
+    <!-- GR_EMBED_END -->
+  </div>
+
+</div>
+
+<footer>© 2026 Michi Sander · Alle Rechte vorbehalten</footer>
+
+</body>
+</html>
