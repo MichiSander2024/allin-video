@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALL IN — Exklusives Video</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C0392B;
+    --red-deep: #96281B;
+    --red-dim: rgba(192,57,43,0.12);
+    --black: #080808;
+    --card: #111111;
+    --border: rgba(192,57,43,0.28);
+    --text: #EDE8E0;
+    --muted: #6B6460;
+    --white: #FFFFFF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 50% at 50% -10%, rgba(192,57,43,0.1) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent, transparent 40px,
+      rgba(192,57,43,0.02) 40px, rgba(192,57,43,0.02) 41px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* LOGIN SCREEN */
+  #loginScreen {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .logo-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 6px;
+    letter-spacing: -0.03em;
+  }
+
+  .logo-mark span { color: var(--red); }
+
+  .logo-sub {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 36px;
+  }
+
+  .login-card {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px 28px;
+  }
+
+  .login-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .login-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 22px;
+    line-height: 1.6;
+  }
+
+  .pw-input-wrap {
+    position: relative;
+    margin-bottom: 12px;
+  }
+
+  input[type="password"], input[type="text"] {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(192,57,43,0.22);
+    border-radius: 8px;
+    padding: 13px 44px 13px 16px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  input:focus {
+    border-color: var(--red);
+    background: rgba(192,57,43,0.06);
+  }
+
+  input::placeholder { color: var(--muted); }
+
+  .eye-btn {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  .eye-btn:hover { color: var(--red); }
+  .eye-btn svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+  .login-btn {
+    width: 100%;
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: background 0.2s, transform 0.1s;
+  }
+
+  .login-btn:hover { background: var(--red-deep); transform: translateY(-1px); }
+  .login-btn:active { transform: translateY(0); }
+
+  .error-msg {
+    display: none;
+    font-size: 12px;
+    color: #e05c5c;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .no-access {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 18px;
+    line-height: 1.7;
+  }
+
+  .no-access a {
+    color: var(--red);
+    text-decoration: none;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%       { transform: translateX(-8px); }
+    40%       { transform: translateX(8px); }
+    60%       { transform: translateX(-6px); }
+    80%       { transform: translateX(6px); }
+  }
+
+  .shake { animation: shake 0.4s ease; }
+
+  /* VIDEO SCREEN */
+  #videoScreen {
+    display: none;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 900px;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .video-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .video-badge {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    background: var(--red-dim);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 5px 14px;
+  }
+
+  .video-wrap {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+    position: relative;
+  }
+
+  .video-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--red), transparent);
+    z-index: 2;
+  }
+
+  .video-wrap iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: none;
+  }
+
+  .video-footer {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 4px;
+  }
+
+  .video-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .logout-btn {
+    font-size: 12px;
+    color: var(--muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.2s;
+  }
+
+  .logout-btn:hover { color: var(--red); }
+  .logout-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+  footer {
+    position: relative;
+    z-index: 1;
+    margin-top: 36px;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="logo-mark">ALL<span>IN</span></div>
+  <div class="logo-sub">Michi Sander</div>
+
+  <div class="login-card">
+    <div class="login-title">Passwort eingeben</div>
+    <p class="login-sub">Du hast dein Passwort per E-Mail erhalten.</p>
+
+    <div class="pw-input-wrap">
+      <input type="password" id="pwInput" placeholder="Dein Passwort" autocomplete="current-password" />
+      <button class="eye-btn" onclick="togglePW()" title="Passwort anzeigen">
+        <svg id="eyeIcon" viewBox="0 0 24 24">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+      </button>
+    </div>
+
+    <button class="login-btn" onclick="checkPassword()">Video ansehen →</button>
+
+    <div class="error-msg" id="errorMsg">
+      ❌ Falsches Passwort. Bitte prüfe deine E-Mail.
+    </div>
+
+    <p class="no-access">
+      Noch kein Passwort?<br>
+      <a href="https://all-in.elitesquadvegas.info/">Hier kostenlos registrieren →</a>
+    </p>
+  </div>
+</div>
+
+<!-- VIDEO -->
+<div id="videoScreen">
+  <div class="video-header">
+    <div class="video-badge">✓ Zugang bestätigt</div>
+  </div>
+
+  <div class="video-wrap">
+    <iframe
+      id="vimeoFrame"
+      src=""
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen
+      title="ALL IN — Michi Sander">
+    </iframe>
+  </div>
+
+  <div class="video-footer">
+    <div class="video-title">ALL IN — Pro Gambling Staking im MLM</div>
+    <button class="logout-btn" onclick="logout()">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Abmelden
+    </button>
+  </div>
+</div>
+
+<footer>© 2026 Michi Sander · Alle Rechte vorbehalten</footer>
+
+<script>
+  const PW_HASH = '6a4501a5b23036284787fbf271e9fc8578f7e8d784406a44b7f6a56b4e57aa81';
+  const VIMEO_ID = '1190989769';
+  const SESSION_KEY = 'allin_auth';
+
+  window.addEventListener('load', () => {
+    if (sessionStorage.getItem(SESSION_KEY) === 'ok') {
+      showVideo();
+    }
+  });
+
+  async function checkPassword() {
+    const pw  = document.getElementById('pwInput').value;
+    const err = document.getElementById('errorMsg');
+
+    if (!pw) return;
+
+    const msgBuffer  = new TextEncoder().encode(pw);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray  = Array.from(new Uint8Array(hashBuffer));
+    const hashHex    = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+    if (hashHex === PW_HASH) {
+      sessionStorage.setItem(SESSION_KEY, 'ok');
+      err.style.display = 'none';
+      showVideo();
+    } else {
+      err.style.display = 'block';
+      document.querySelector('.login-card').classList.remove('shake');
+      void document.querySelector('.login-card').offsetWidth;
+      document.querySelector('.login-card').classList.add('shake');
+    }
+  }
+
+  function showVideo() {
+    document.getElementById('loginScreen').style.display = 'none';
+    const vs = document.getElementById('videoScreen');
+    vs.style.display = 'flex';
+    document.getElementById('vimeoFrame').src =
+      `https://player.vimeo.com/video/${VIMEO_ID}?h=eb02366b48&autoplay=1&title=0&byline=0&portrait=0&color=C0392B`;
+  }
+
+  function logout() {
+    sessionStorage.removeItem(SESSION_KEY);
+    document.getElementById('vimeoFrame').src = '';
+    document.getElementById('videoScreen').style.display = 'none';
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('pwInput').value = '';
+  }
+
+  function togglePW() {
+    const input = document.getElementById('pwInput');
+    const icon  = document.getElementById('eyeIcon');
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/>';
+    } else {
+      input.type = 'password';
+      icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+    }
+  }
+
+  document.getElementById('pwInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') checkPassword();
+  });
+</script>
+
+</body>
+</html>
