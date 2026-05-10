@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>E-Mail bestätigt — Dein Passwort</title>
+<title>E-Mail bestätigt — Dein Passwort kommt per Mail</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -104,14 +104,12 @@
     line-height: 1.7;
   }
 
-  /* Passwort-Box */
   .pw-box {
     width: 100%;
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 28px;
-    text-align: center;
     margin-bottom: 20px;
   }
 
@@ -122,50 +120,9 @@
     text-transform: uppercase;
     color: var(--muted);
     margin-bottom: 14px;
+    text-align: center;
   }
 
-  .pw-display {
-    font-family: 'Outfit', monospace;
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--red);
-    background: rgba(192,57,43,0.08);
-    border: 1px solid rgba(192,57,43,0.25);
-    border-radius: 8px;
-    padding: 14px 20px;
-    letter-spacing: 0.06em;
-    margin-bottom: 16px;
-    word-break: break-all;
-  }
-
-  .copy-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 8px 16px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--muted);
-    cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
-    margin-bottom: 8px;
-  }
-
-  .copy-btn:hover { border-color: var(--red); color: var(--red); }
-  .copy-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
-
-  .copied-msg {
-    display: none;
-    font-size: 11px;
-    color: var(--red);
-    margin-top: 6px;
-  }
-
-  /* CTA Button zum Video */
   .video-btn {
     display: block;
     width: 100%;
@@ -217,18 +174,19 @@
 
   <h1>E-Mail bestätigt!</h1>
   <p class="sub">
-    Danke — hier ist dein persönliches Passwort<br>
-    für das exklusive Video von Michi Sander.
+    Perfekt — du bist jetzt freigeschaltet.<br>
+    In wenigen Sekunden bekommst du eine E-Mail<br>
+    mit deinem persönlichen <strong style="color:var(--red);">Video-Passwort</strong>.
   </p>
 
   <div class="pw-box">
-    <div class="pw-label">Dein Video-Passwort</div>
-    <div class="pw-display" id="pwDisplay">jokerx&amp;michisander</div>
-    <button class="copy-btn" onclick="copyPW()">
-      <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-      Passwort kopieren
-    </button>
-    <div class="copied-msg" id="copiedMsg">✓ Kopiert!</div>
+    <div class="pw-label">So geht's weiter</div>
+    <ol style="color: var(--text); font-size: 14px; line-height: 1.9; padding-left: 20px; margin: 0;">
+      <li>Öffne dein E-Mail-Postfach</li>
+      <li>Such die Mail von <strong>Michi Sander</strong></li>
+      <li>Kopiere das Passwort aus der Mail</li>
+      <li>Klick unten auf <strong>„Zum Video"</strong> und logg dich ein</li>
+    </ol>
   </div>
 
   <a class="video-btn" href="https://all-in.elitesquadvegas.info/video.html">
@@ -236,24 +194,13 @@
   </a>
 
   <p class="hint">
-    Das Passwort gilt nur für dich — bitte nicht weitergeben.<br>
-    Tipp: Kopiere es zuerst, dann klick auf "Zum Video".
+    Keine Mail bekommen? Schau im Spam-Ordner nach.<br>
+    Das Passwort ist persönlich — bitte nicht weitergeben.
   </p>
 
 </div>
 
 <footer>© 2026 Michi Sander · Alle Rechte vorbehalten</footer>
-
-<script>
-  function copyPW() {
-    navigator.clipboard.writeText('jokerx&michisander').then(() => {
-      document.getElementById('copiedMsg').style.display = 'block';
-      setTimeout(() => {
-        document.getElementById('copiedMsg').style.display = 'none';
-      }, 2500);
-    });
-  }
-</script>
 
 </body>
 </html>
