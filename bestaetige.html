@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bitte bestätige Deine E-Mail — ALL IN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C0392B;
+    --red-deep: #96281B;
+    --red-dim: rgba(192,57,43,0.12);
+    --black: #080808;
+    --card: #111111;
+    --border: rgba(192,57,43,0.28);
+    --text: #EDE8E0;
+    --muted: #6B6460;
+    --white: #FFFFFF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(192,57,43,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent, transparent 40px,
+      rgba(192,57,43,0.02) 40px, rgba(192,57,43,0.02) 41px
+    );
+    pointer-events: none;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .mail-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid rgba(192,57,43,0.5);
+    background: var(--red-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  .mail-icon svg {
+    width: 36px;
+    height: 36px;
+    stroke: var(--red);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(192,57,43,0.4); }
+    50%      { box-shadow: 0 0 0 12px rgba(192,57,43,0); }
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 7vw, 48px);
+    font-weight: 800;
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 10px;
+    line-height: 1.1;
+  }
+
+  h1 .accent { color: var(--red); }
+
+  .sub {
+    font-size: 15px;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 32px;
+    line-height: 1.7;
+  }
+
+  .sub strong { color: var(--text); }
+
+  .info-box {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+
+  .info-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  ol {
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.9;
+    padding-left: 22px;
+    margin: 0;
+  }
+
+  ol li { padding-left: 6px; }
+  ol li strong { color: var(--red); }
+
+  .hint {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.7;
+    margin-top: 8px;
+  }
+
+  .hint strong { color: var(--text); }
+
+  footer {
+    position: relative;
+    z-index: 1;
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="mail-icon">
+    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+  </div>
+
+  <h1>Check Deine <span class="accent">Mail</span></h1>
+  <p class="sub">
+    Du hast Dich gerade angemeldet. Damit ich Dir Dein Passwort schicken kann,<br>
+    brauche ich noch <strong>eine kurze Bestätigung</strong> von Dir.
+  </p>
+
+  <div class="info-box">
+    <div class="info-label">So geht's weiter</div>
+    <ol>
+      <li>Öffne Dein <strong>E-Mail-Postfach</strong></li>
+      <li>Such die Mail von <strong>Elite Squad Vegas</strong></li>
+      <li>Klick auf den <strong>Bestätigungs-Link</strong> in der Mail</li>
+      <li>Danach kommt sofort Dein <strong>Passwort</strong> in einer 2. Mail</li>
+    </ol>
+  </div>
+
+  <p class="hint">
+    Keine Mail bekommen? Schau im <strong>Spam-Ordner</strong> nach.<br>
+    Manchmal landen die ersten Mails dort.
+  </p>
+
+</div>
+
+<footer>© 2026 Michi Sander · Alle Rechte vorbehalten</footer>
+
+</body>
+</html>
